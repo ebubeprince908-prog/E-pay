@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-pay.ng — Invest in Your Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --lime: #CDFF00;
+      --orange: #FF5C1A;
+      --navy: #060D1F;
+      --blue: #1338BE;
+      --white: #F5F5F0;
+      --mid: #A0A8B8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 5%;
+      background: rgba(6,13,31,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      color: var(--lime);
+    }
+    .logo img { height: 44px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 600;
+      color: var(--mid); text-decoration: none; letter-spacing: 1px;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--lime); }
+    .nav-cta {
+      background: var(--lime); color: var(--navy);
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.7rem 1.6rem; border: none; cursor: pointer;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--orange); transform: scale(1.04); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(19,56,190,0.45) 0%, transparent 70%);
+      animation: pulse 6s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -150px; left: 30%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(205,255,0,0.12) 0%, transparent 70%);
+      animation: pulse 8s ease-in-out infinite reverse;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.7; }
+    }
+    .hero-left { position: relative; z-index: 2; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(205,255,0,0.1); border: 1px solid rgba(205,255,0,0.3);
+      color: var(--lime); font-family: 'Syne', sans-serif;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; padding: 0.4rem 1rem;
+      border-radius: 2px; margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--lime); animation: blink 1.5s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      line-height: 0.92; letter-spacing: 2px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero h1 .accent { color: var(--lime); }
+    .hero h1 .orange { color: var(--orange); }
+    .hero-sub {
+      margin-top: 2rem; max-width: 440px;
+      font-size: 1.05rem; line-height: 1.7; color: var(--mid);
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-actions {
+      margin-top: 2.8rem; display: flex; gap: 1.2rem; flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--orange); color: var(--white);
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 1rem 2.5rem; border: none; cursor: pointer;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--lime); color: var(--navy); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      font-family: 'Syne', sans-serif; font-weight: 600;
+      font-size: 0.9rem; letter-spacing: 1px;
+      padding: 1rem 2rem; border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero right: Big stat card stack */
+    .hero-right {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      padding-left: 6%;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 1.6rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .stat-card:hover { background: rgba(205,255,0,0.05); transform: translateX(6px); }
+    .stat-card.highlight { background: var(--lime); border-color: var(--lime); }
+    .stat-card.highlight .stat-label,
+    .stat-card.highlight .stat-num { color: var(--navy); }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; letter-spacing: 2px; color: var(--lime);
+    }
+    .stat-card.highlight .stat-num { color: var(--navy); }
+    .stat-label { font-size: 0.85rem; color: var(--mid); max-width: 150px; line-height: 1.4; }
+    .stat-arrow { font-size: 1.5rem; color: rgba(255,255,255,0.15); }
+    .stat-card.highlight .stat-arrow { color: var(--navy); }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      overflow: hidden; background: var(--orange);
+      padding: 0.75rem 0; position: relative;
+    }
+    .ticker {
+      display: flex; gap: 3rem;
+      animation: scroll 22s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker span {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--navy); flex-shrink: 0;
+    }
+    .ticker .dot { color: var(--navy); opacity: 0.4; }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SERVICES ── */
+    .section { padding: 100px 5%; }
+    .section-label {
+      font-family: 'Syne', sans-serif; font-size: 0.75rem;
+      font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem); letter-spacing: 2px;
+      line-height: 1; margin-bottom: 1.2rem;
+    }
+    .section-sub { color: var(--mid); max-width: 520px; line-height: 1.7; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .service-card:hover { transform: translateY(-6px); border-color: var(--lime); }
+    .service-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--lime); transform: scaleX(0);
+      transform-origin: left; transition: transform 0.3s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem; color: rgba(205,255,0,0.08);
+      line-height: 1; margin-bottom: 1.5rem;
+    }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-card h3 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 1.15rem; margin-bottom: 0.8rem; letter-spacing: 0.5px;
+    }
+    .service-card p { font-size: 0.9rem; color: var(--mid); line-height: 1.65; }
+
+    /* ── WHY US ── */
+    .why-section {
+      padding: 100px 5%;
+      background: linear-gradient(135deg, rgba(19,56,190,0.15), transparent);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .why-left {}
+    .big-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 9rem; color: var(--lime); line-height: 1;
+      opacity: 0.12; position: absolute;
+    }
+    .features { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
+    .feature { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .feature-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--lime); flex-shrink: 0; margin-top: 5px;
+    }
+    .feature h4 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1rem; margin-bottom: 0.4rem;
+    }
+    .feature p { color: var(--mid); font-size: 0.9rem; line-height: 1.6; }
+    .why-right {
+      background: var(--blue);
+      border-radius: 4px; padding: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .why-right::before {
+      content: ''; position: absolute;
+      top: -80px; right: -80px;
+      width: 220px; height: 220px;
+      background: rgba(205,255,0,0.15); border-radius: 50%;
+    }
+    .testimonial {
+      position: relative; z-index: 1;
+    }
+    .quote-mark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem; color: var(--lime); line-height: 0.8;
+      margin-bottom: 1rem;
+    }
+    .testimonial p {
+      font-size: 1.1rem; line-height: 1.75;
+      font-style: italic; color: var(--white);
+      margin-bottom: 2rem;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+    .author-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--lime); display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--navy);
+    }
+    .author-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
+    .author-role { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      padding: 100px 5%;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 3rem;
+    }
+    .cta-strip h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 2px; line-height: 1;
+    }
+    .cta-strip h2 span { color: var(--lime); }
+    .cta-btn {
+      background: var(--lime); color: var(--navy);
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase;
+      padding: 1.2rem 3rem; border: none; cursor: pointer;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .cta-btn:hover { background: var(--orange); color: var(--white); transform: scale(1.04); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 5%;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer .logo { font-size: 1.4rem; }
+    footer p { color: var(--mid); font-size: 0.82rem; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      color: var(--mid); font-size: 0.82rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--lime); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 140px; }
+      .hero-right { padding-left: 0; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .cta-strip { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo"><img src="https://epay2.wordpress.com/wp-content/uploads/2026/05/1777631272895.png" alt="E-pay.ng"/></div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta">Get Started</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">🚀 Top-Rated Investment Firm 2024</div>
+      <h1>
+        GROW YOUR<br>
+        <span class="accent">WEALTH</span><br>
+        <span class="orange">BOLDLY.</span>
+      </h1>
+      <p class="hero-sub">
+        E-pay.ng gives you access to high-yield investment strategies, expert portfolio management, and real-time market intelligence — all in one place.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary">Start Investing</button>
+        <button class="btn-ghost">See How It Works →</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card highlight">
+        <div>
+          <div class="stat-num">+34%</div>
+          <div class="stat-label">Average annual return for clients</div>
+        </div>
+        <div class="stat-arrow">↗</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-num">$2.8B</div>
+          <div class="stat-label">Assets under management</div>
+        </div>
+        <div class="stat-arrow">→</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-num">50K+</div>
+          <div class="stat-label">Active investors on our platform</div>
+        </div>
+        <div class="stat-arrow">→</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-num">12YRS</div>
+          <div class="stat-label">Decades of market expertise</div>
+        </div>
+        <div class="stat-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>Stocks</span><span class="dot">◆</span>
+      <span>Real Estate</span><span class="dot">◆</span>
+      <span>Crypto</span><span class="dot">◆</span>
+      <span>Commodities</span><span class="dot">◆</span>
+      <span>ETFs</span><span class="dot">◆</span>
+      <span>Bonds</span><span class="dot">◆</span>
+      <span>Private Equity</span><span class="dot">◆</span>
+      <span>Hedge Funds</span><span class="dot">◆</span>
+      <!-- duplicate for seamless loop -->
+      <span>Stocks</span><span class="dot">◆</span>
+      <span>Real Estate</span><span class="dot">◆</span>
+      <span>Crypto</span><span class="dot">◆</span>
+      <span>Commodities</span><span class="dot">◆</span>
+      <span>ETFs</span><span class="dot">◆</span>
+      <span>Bonds</span><span class="dot">◆</span>
+      <span>Private Equity</span><span class="dot">◆</span>
+      <span>Hedge Funds</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">SMART INVESTMENT<br>SOLUTIONS</h2>
+    <p class="section-sub">Whether you're a first-time investor or a seasoned trader, we have a tailored strategy to help you reach your financial goals faster.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-icon">📈</div>
+        <h3>Portfolio Management</h3>
+        <p>Our expert analysts craft personalized portfolios aligned to your risk appetite and long-term financial vision.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-icon">🏦</div>
+        <h3>Fixed Income</h3>
+        <p>Stable, predictable returns through government and corporate bonds. The smart anchor for any diversified portfolio.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-icon">🌍</div>
+        <h3>Global Markets</h3>
+        <p>Access over 40 global markets and diversify across asset classes, geographies, and currencies with ease.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-icon">🤖</div>
+        <h3>AI-Driven Insights</h3>
+        <p>Our proprietary AI engine scans millions of data points daily to surface alpha-generating opportunities before the market moves.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-icon">🏠</div>
+        <h3>Real Estate Funds</h3>
+        <p>Gain real estate exposure without the hassle of property ownership. High-yield REITs and direct fund options available.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-icon">🔐</div>
+        <h3>Wealth Protection</h3>
+        <p>Hedge against inflation, market crashes, and currency devaluation with our risk-management strategies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-section" id="why">
+    <div class="why-grid">
+      <div class="why-left">
+        <div class="section-label">Why E-pay.ng</div>
+        <h2 class="section-title">THE EDGE<br>YOU NEED.</h2>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-dot"></div>
+            <div>
+              <h4>Zero Hidden Fees</h4>
+              <p>Transparent pricing with no lock-in periods. You keep more of what you earn.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-dot"></div>
+            <div>
+              <h4>Real-Time Dashboard</h4>
+              <p>Track every position, gain, and market movement from your phone or desktop — 24/7.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-dot"></div>
+            <div>
+              <h4>Regulated & Secure</h4>
+              <p>Fully licensed, SEC-compliant, and protected by bank-grade 256-bit encryption.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-dot"></div>
+            <div>
+              <h4>Dedicated Advisors</h4>
+              <p>Every client gets a dedicated financial advisor — not a chatbot. Real humans, real answers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-right">
+        <div class="testimonial">
+          <div class="quote-mark">"</div>
+          <p>E-pay.ng turned my savings into a self-sustaining portfolio. I've grown my wealth by 40% in under two years — and I barely had to lift a finger.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JM</div>
+            <div>
+              <div class="author-name">James Mwangi</div>
+              <div class="author-role">Entrepreneur & Investor</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip" id="contact">
+    <h2>READY TO BUILD<br><span>REAL WEALTH?</span></h2>
+    <button class="cta-btn">Open Free Account →</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo"><img src="https://epay2.wordpress.com/wp-content/uploads/2026/05/1777631272895.png" alt="E-pay.ng"/></div>
+    <p>© 2026 E-pay.ng. All rights reserved. Investments carry risk.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
